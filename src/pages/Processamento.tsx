@@ -86,38 +86,39 @@ const Processamento: React.FC = () => {
   };
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-4 sm:space-y-6 p-2 sm:p-4 lg:p-6">
       {/* Header */}
-      <div className="flex items-center justify-between">
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
         <div>
-          <h1 className="text-3xl font-bold tracking-tight text-foreground">Processamento</h1>
-          <p className="text-muted-foreground">Cálculos automáticos e consolidação de dados</p>
+          <h1 className="text-2xl sm:text-3xl font-bold tracking-tight text-foreground">Processamento</h1>
+          <p className="text-sm sm:text-base text-muted-foreground">Resultados dos cálculos automáticos</p>
         </div>
-        <div className="flex items-center gap-4">
+        <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4">
           <Button 
             onClick={handleRecalculate} 
             disabled={isProcessing}
             variant="outline"
+            size="sm"
           >
             <RefreshCw className={`w-4 h-4 mr-2 ${isProcessing ? 'animate-spin' : ''}`} />
             {isProcessing ? 'Processando...' : 'Recalcular'}
           </Button>
           <div className="text-right">
-            <p className="text-sm text-muted-foreground">Último processamento</p>
-            <p className="text-sm font-medium">{formatDateTime(lastProcessing)}</p>
+            <p className="text-xs sm:text-sm text-muted-foreground">Último processamento</p>
+            <p className="text-xs sm:text-sm font-medium">{formatDateTime(lastProcessing)}</p>
           </div>
         </div>
       </div>
 
       {/* Métricas Principais */}
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+      <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 lg:gap-6">
         <Card>
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Total Produzido</CardTitle>
-            <TrendingUp className="h-4 w-4 text-muted-foreground" />
+          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2 p-3 sm:p-4 lg:p-6">
+            <CardTitle className="text-xs sm:text-sm font-medium">Total Produzido</CardTitle>
+            <TrendingUp className="h-3 w-3 sm:h-4 sm:w-4 text-muted-foreground" />
           </CardHeader>
-          <CardContent>
-            <div className="text-2xl font-bold">{totals.kgtd.toLocaleString('pt-BR')} KG</div>
+          <CardContent className="p-3 sm:p-4 lg:p-6 pt-0">
+            <div className="text-lg sm:text-2xl font-bold">{totals.kgtd.toLocaleString('pt-BR')} KG</div>
             <p className="text-xs text-muted-foreground">
               {totals.cxstd.toLocaleString('pt-BR')} caixas
             </p>
@@ -125,29 +126,29 @@ const Processamento: React.FC = () => {
         </Card>
 
         <Card>
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Eficiência Geral</CardTitle>
-            <Calculator className="h-4 w-4 text-muted-foreground" />
+          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2 p-3 sm:p-4 lg:p-6">
+            <CardTitle className="text-xs sm:text-sm font-medium">Eficiência Geral</CardTitle>
+            <Calculator className="h-3 w-3 sm:h-4 sm:w-4 text-muted-foreground" />
           </CardHeader>
-          <CardContent>
-            <div className="text-2xl font-bold">{eficienciaGeral.toFixed(1)}%</div>
+          <CardContent className="p-3 sm:p-4 lg:p-6 pt-0">
+            <div className="text-lg sm:text-2xl font-bold">{eficienciaGeral.toFixed(1)}%</div>
             <Progress 
               value={Math.min(eficienciaGeral, 100)} 
-              className="mt-2"
+              className="mt-2 h-2"
             />
           </CardContent>
         </Card>
 
         <Card>
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Diferença P/R</CardTitle>
+          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2 p-3 sm:p-4 lg:p-6">
+            <CardTitle className="text-xs sm:text-sm font-medium">Diferença P/R</CardTitle>
             {totals.diferenca >= 0 ? 
-              <TrendingUp className="h-4 w-4 text-green-600" /> : 
-              <TrendingDown className="h-4 w-4 text-red-600" />
+              <TrendingUp className="h-3 w-3 sm:h-4 sm:w-4 text-green-600" /> : 
+              <TrendingDown className="h-3 w-3 sm:h-4 sm:w-4 text-red-600" />
             }
           </CardHeader>
-          <CardContent>
-            <div className={`text-2xl font-bold ${totals.diferenca >= 0 ? 'text-green-600' : 'text-red-600'}`}>
+          <CardContent className="p-3 sm:p-4 lg:p-6 pt-0">
+            <div className={`text-lg sm:text-2xl font-bold ${totals.diferenca >= 0 ? 'text-green-600' : 'text-red-600'}`}>
               {totals.diferenca >= 0 ? '+' : ''}{totals.diferenca.toLocaleString('pt-BR')} KG
             </div>
             <p className="text-xs text-muted-foreground">
@@ -157,12 +158,12 @@ const Processamento: React.FC = () => {
         </Card>
 
         <Card>
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Itens Processados</CardTitle>
-            <Calculator className="h-4 w-4 text-muted-foreground" />
+          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2 p-3 sm:p-4 lg:p-6">
+            <CardTitle className="text-xs sm:text-sm font-medium">Itens Processados</CardTitle>
+            <Calculator className="h-3 w-3 sm:h-4 sm:w-4 text-muted-foreground" />
           </CardHeader>
-          <CardContent>
-            <div className="text-2xl font-bold">{totalItems}</div>
+          <CardContent className="p-3 sm:p-4 lg:p-6 pt-0">
+            <div className="text-lg sm:text-2xl font-bold">{totalItems}</div>
             <p className="text-xs text-muted-foreground">
               produtos em produção
             </p>
@@ -170,128 +171,60 @@ const Processamento: React.FC = () => {
         </Card>
       </div>
 
-      {/* Painel de Cálculos */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        {/* Fórmulas de Cálculo */}
-        <Card>
-          <CardHeader>
-            <CardTitle>Fórmulas de Cálculo</CardTitle>
-          </CardHeader>
-          <CardContent className="space-y-4">
-            <div className="p-4 bg-muted/50 rounded-lg">
-              <h4 className="font-semibold mb-2">CTP1 - Eficiência Turno 1</h4>
-              <code className="text-sm">CTP1 = (KG ÷ 1° TURNO) × 100</code>
-              <p className="text-xs text-muted-foreground mt-1">
-                Mede eficiência do primeiro turno
-              </p>
-            </div>
-
-            <div className="p-4 bg-muted/50 rounded-lg">
-              <h4 className="font-semibold mb-2">CTP2 - Eficiência Turno 2</h4>
-              <code className="text-sm">CTP2 = (KG2 ÷ 2° TURNO) × 100</code>
-              <p className="text-xs text-muted-foreground mt-1">
-                Mede eficiência do segundo turno
-              </p>
-            </div>
-
-            <div className="p-4 bg-muted/50 rounded-lg">
-              <h4 className="font-semibold mb-2">CTPTD - Eficiência Total</h4>
-              <code className="text-sm">CTPTD = (KGTD ÷ (1° TURNO + 2° TURNO)) × 100</code>
-              <p className="text-xs text-muted-foreground mt-1">
-                Eficiência consolidada do dia
-              </p>
-            </div>
-
-            <div className="p-4 bg-muted/50 rounded-lg">
-              <h4 className="font-semibold mb-2">Diferença P/R</h4>
-              <code className="text-sm">Diferença = KGTD - (1° TURNO + 2° TURNO)</code>
-              <p className="text-xs text-muted-foreground mt-1">
-                Diferença entre planejado e realizado
-              </p>
-            </div>
-          </CardContent>
-        </Card>
-
-        {/* Parâmetros Ajustáveis */}
-        <Card>
-          <CardHeader>
-            <CardTitle>Parâmetros de Conversão</CardTitle>
-          </CardHeader>
-          <CardContent className="space-y-4">
-            <div className="space-y-3">
-              <div className="flex justify-between items-center p-3 border rounded-lg">
-                <div>
-                  <p className="font-medium">Conversão KG → CX</p>
-                  <p className="text-sm text-muted-foreground">Base: PESO LIQ UNIT KG × UN/CX</p>
-                </div>
-                <Badge variant="outline">Automático</Badge>
-              </div>
-
-              <div className="flex justify-between items-center p-3 border rounded-lg">
-                <div>
-                  <p className="font-medium">Batch Receita</p>
-                  <p className="text-sm text-muted-foreground">Eficiência por lote</p>
-                </div>
-                <Badge variant="outline">Configurável</Badge>
-              </div>
-
-              <div className="flex justify-between items-center p-3 border rounded-lg">
-                <div>
-                  <p className="font-medium">Tolerância Eficiência</p>
-                  <p className="text-sm text-muted-foreground">Margem aceitável: ±5%</p>
-                </div>
-                <Badge variant="default">Ativo</Badge>
-              </div>
-            </div>
-          </CardContent>
-        </Card>
-      </div>
-
       {/* Tabela de Resultados Processados */}
       {consolidatedData.length > 0 && (
         <Card>
-          <CardHeader>
-            <CardTitle>Resultados do Processamento</CardTitle>
+          <CardHeader className="p-3 sm:p-4 lg:p-6">
+            <CardTitle className="text-base sm:text-lg">Resultados do Processamento</CardTitle>
           </CardHeader>
-          <CardContent>
+          <CardContent className="p-3 sm:p-4 lg:p-6 pt-0">
             <div className="overflow-x-auto">
               <Table>
                 <TableHeader>
                   <TableRow>
-                    <TableHead>Código</TableHead>
-                    <TableHead>Produto</TableHead>
-                    <TableHead>KGTD</TableHead>
-                    <TableHead>CXSTD</TableHead>
-                    <TableHead>CTP1 (%)</TableHead>
-                    <TableHead>CTP2 (%)</TableHead>
-                    <TableHead>CTPTD (%)</TableHead>
-                    <TableHead>Dif. P/R</TableHead>
+                    <TableHead className="text-xs sm:text-sm">Código</TableHead>
+                    <TableHead className="text-xs sm:text-sm hidden sm:table-cell">Produto</TableHead>
+                    <TableHead className="text-xs sm:text-sm">KGTD</TableHead>
+                    <TableHead className="text-xs sm:text-sm hidden lg:table-cell">CXSTD</TableHead>
+                    <TableHead className="text-xs sm:text-sm">CTP1 (%)</TableHead>
+                    <TableHead className="text-xs sm:text-sm">CTP2 (%)</TableHead>
+                    <TableHead className="text-xs sm:text-sm">CTPTD (%)</TableHead>
+                    <TableHead className="text-xs sm:text-sm">Dif. P/R</TableHead>
                   </TableRow>
                 </TableHeader>
                 <TableBody>
                   {consolidatedData.slice(0, 15).map((item) => (
                     <TableRow key={item.id}>
-                      <TableCell className="font-mono">{item.codigo}</TableCell>
-                      <TableCell>{item.descricaoProduto}</TableCell>
-                      <TableCell>{item.kgtd.toLocaleString('pt-BR')}</TableCell>
-                      <TableCell>{item.cxstd.toLocaleString('pt-BR')}</TableCell>
+                      <TableCell className="font-mono text-xs sm:text-sm">{item.codigo}</TableCell>
+                      <TableCell className="text-xs sm:text-sm hidden sm:table-cell truncate max-w-32">{item.descricaoProduto}</TableCell>
+                      <TableCell className="text-xs sm:text-sm">{item.kgtd.toLocaleString('pt-BR')}</TableCell>
+                      <TableCell className="text-xs sm:text-sm hidden lg:table-cell">{item.cxstd.toLocaleString('pt-BR')}</TableCell>
                       <TableCell>
-                        <Badge variant={item.ctp1 >= 100 ? "default" : item.ctp1 >= 80 ? "secondary" : "destructive"}>
+                        <Badge 
+                          variant={item.ctp1 >= 100 ? "default" : item.ctp1 >= 80 ? "secondary" : "destructive"}
+                          className="text-xs"
+                        >
                           {item.ctp1.toFixed(1)}%
                         </Badge>
                       </TableCell>
                       <TableCell>
-                        <Badge variant={item.ctp2 >= 100 ? "default" : item.ctp2 >= 80 ? "secondary" : "destructive"}>
+                        <Badge 
+                          variant={item.ctp2 >= 100 ? "default" : item.ctp2 >= 80 ? "secondary" : "destructive"}
+                          className="text-xs"
+                        >
                           {item.ctp2.toFixed(1)}%
                         </Badge>
                       </TableCell>
                       <TableCell>
-                        <Badge variant={item.ctptd >= 100 ? "default" : item.ctptd >= 80 ? "secondary" : "destructive"}>
+                        <Badge 
+                          variant={item.ctptd >= 100 ? "default" : item.ctptd >= 80 ? "secondary" : "destructive"}
+                          className="text-xs"
+                        >
                           {item.ctptd.toFixed(1)}%
                         </Badge>
                       </TableCell>
                       <TableCell>
-                        <span className={item.diferencaPrKg >= 0 ? "text-green-600" : "text-red-600"}>
+                        <span className={`text-xs sm:text-sm ${item.diferencaPrKg >= 0 ? "text-green-600" : "text-red-600"}`}>
                           {item.diferencaPrKg >= 0 ? '+' : ''}{item.diferencaPrKg.toLocaleString('pt-BR')}
                         </span>
                       </TableCell>
