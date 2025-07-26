@@ -356,9 +356,9 @@ const Produtos: React.FC = () => {
                       <Badge variant="outline">{produto.maquina}</Badge>
                     </TableCell>
                     <TableCell>{produto.embalagem}</TableCell>
-                    <TableCell>{produto.unCx}</TableCell>
-                    <TableCell>{produto.pesoLiqUnitKg.toFixed(3)} kg</TableCell>
-                    <TableCell>{produto.batchReceitaKg.toFixed(1)} kg</TableCell>
+                    <TableCell>{produto.unCx || 0}</TableCell>
+                    <TableCell>{(produto.pesoLiqUnitKg || 0).toFixed(3)} kg</TableCell>
+                    <TableCell>{(produto.batchReceitaKg || 0).toFixed(1)} kg</TableCell>
                     <TableCell>
                       <Badge 
                         variant={
