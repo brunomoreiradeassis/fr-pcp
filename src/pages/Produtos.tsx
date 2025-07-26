@@ -56,7 +56,7 @@ const Produtos: React.FC = () => {
 
   const onSubmit = async (data: z.infer<typeof produtoSchema>) => {
     try {
-      await addProduto(data);
+      await addProduto(data as Omit<ProdutoData, 'id'>);
       form.reset();
       setIsDialogOpen(false);
     } catch (error) {
